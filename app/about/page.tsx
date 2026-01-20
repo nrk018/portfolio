@@ -111,7 +111,7 @@ function TechStackGrid({ items, isDark }: { items: TechStackItem[]; isDark: bool
                     />
                   </div>
                 )}
-                <CardTitle style={{ marginTop: 0 }}>{item.title}</CardTitle>
+                <CardTitle className="mt-0">{item.title}</CardTitle>
                 <CardDescription>{item.description}</CardDescription>
               </div>
             </Card>

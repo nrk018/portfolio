@@ -28,7 +28,7 @@ const letterVariants = {
     y: "-120%",
     color: "var(--color-zinc-500)",
     transition: {
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 20,
     },

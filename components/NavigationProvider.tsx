@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef, ReactNode, createContext, useContext } from "react";
+import { useEffect, useState, useRef, ReactNode, createContext, useContext, Suspense } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { Component } from "@/components/ui/luma-spin";
 import { useTheme } from "@/components/ThemeProvider";
@@ -16,7 +16,7 @@ const NavigationContext = createContext<NavigationContextType>({
 
 export const useNavigation = () => useContext(NavigationContext);
 
-export default function NavigationProvider({ children }: { children: ReactNode }) {
+function NavigationProviderInner({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { theme } = useTheme();
@@ -139,3 +139,10 @@ export default function NavigationProvider({ children }: { children: ReactNode }
   );
 }
 
+export default function NavigationProvider({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={children}>
+      <NavigationProviderInner>{children}</NavigationProviderInner>
+    </Suspense>
+  );
+}
